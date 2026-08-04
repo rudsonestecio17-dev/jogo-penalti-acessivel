@@ -11,7 +11,7 @@ const images = {
 };
 
 // Imagem do Cenário Realista (Certifique-se de salvar o arquivo stadium.jpg na mesma pasta)
-images.stadium.src = 'stadium.jpg';
+images.stadium.src = 'stadium/stadium.jpg.jpg';
 
 // Bola de Futebol Estilo Champions (Painéis Cinza/Branco)
 images.ball.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="%23ffffff" stroke="%23333333" stroke-width="4"/><polygon points="50,22 64,32 59,48 41,48 36,32" fill="%2378909c"/><polygon points="50,78 36,68 41,52 59,52 64,68" fill="%2378909c"/><polygon points="22,50 32,36 48,41 48,59 32,64" fill="%2378909c"/><polygon points="78,50 68,36 52,41 52,59 68,64" fill="%2378909c"/></svg>';
