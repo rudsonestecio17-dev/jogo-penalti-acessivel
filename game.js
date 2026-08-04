@@ -10,16 +10,16 @@ const images = {
   player: new Image()
 };
 
-// Imagem do Cenário Realista (Certifique-se de salvar o arquivo stadium.jpg na mesma pasta)
-images.stadium.src = 'stadium/stadium.jpg';
+// Imagem do Cenário Hospedada na Web (Carregamento Garantido)
+images.stadium.src = 'https://i.ibb.co/HDqLFPh2/stadium.jpg';
 
-// Bola de Futebol Estilo Champions (Painéis Cinza/Branco)
+// Bola de Futebol Estilo Champions
 images.ball.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="%23ffffff" stroke="%23333333" stroke-width="4"/><polygon points="50,22 64,32 59,48 41,48 36,32" fill="%2378909c"/><polygon points="50,78 36,68 41,52 59,52 64,68" fill="%2378909c"/><polygon points="22,50 32,36 48,41 48,59 32,64" fill="%2378909c"/><polygon points="78,50 68,36 52,41 52,59 68,64" fill="%2378909c"/></svg>';
 
-// Goleiro Laranja (Idêntico ao da imagem de referência)
+// Goleiro Laranja (Ajustado com o cenário)
 images.keeper.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 180"><circle cx="60" cy="30" r="16" fill="%236d4c41"/><path d="M40 50 Q60 20 80 50 L90 110 L30 110 Z" fill="%23fb8c00"/><rect x="42" y="50" width="36" height="65" rx="8" fill="%23f57c00"/><rect x="35" y="115" width="22" height="58" rx="6" fill="%23e65100"/><rect x="63" y="115" width="22" height="58" rx="6" fill="%23e65100"/><rect x="15" y="60" width="25" height="15" rx="7" fill="%23ffffff"/><rect x="80" y="60" width="25" height="15" rx="7" fill="%23ffffff"/></svg>';
 
-// Jogador Batedor (Camisa Listrada Azul e Branco, em perspectiva de costas)
+// Jogador Batedor em Perspectiva
 images.player.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 220"><path d="M35 50 Q70 20 105 50 L115 130 L25 130 Z" fill="%231565c0"/><path d="M50 48 L50 130 L65 130 L65 48 Z" fill="%23ffffff"/><path d="M80 48 L80 130 L95 130 L95 48 Z" fill="%23ffffff"/><circle cx="70" cy="28" r="20" fill="%235d4037"/><rect x="35" y="130" width="30" height="70" rx="8" fill="%230d47a1"/><rect x="75" y="130" width="30" height="70" rx="8" fill="%230d47a1"/><rect x="35" y="200" width="30" height="18" fill="%23ffffff"/><rect x="75" y="200" width="30" height="18" fill="%23ffffff"/></svg>';
 
 // --- ÁUDIO SINTETIZADO E VOZ ---
@@ -109,7 +109,6 @@ let isRunning = false;
 let shotResult = "";
 let score = 0;
 
-// Ajuste das coordenadas para casar com a trave da foto de fundo
 let ballX = 490;
 let ballY = 430;
 let ballScale = 1.0; 
@@ -156,11 +155,10 @@ function update() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 1. Renderiza o Cenário do Estádio HD ao Fundo
+  // 1. Renderiza o Cenário do Estádio HD via Web
   if (images.stadium.complete && images.stadium.naturalWidth !== 0) {
     ctx.drawImage(images.stadium, 0, 0, canvas.width, canvas.height);
   } else {
-    // Fundo reserva caso a imagem ainda esteja carregando
     ctx.fillStyle = '#1b5e20';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
@@ -168,12 +166,12 @@ function draw() {
   // 2. Renderiza o Goleiro Laranja
   ctx.drawImage(images.keeper, keeperX, 235, 85, 125);
 
-  // 3. Renderiza o Batedor (Camisa Listrada Azul)
+  // 3. Renderiza o Batedor
   if (!isShot) {
     ctx.drawImage(images.player, playerX, playerY, 115, 175);
   }
 
-  // 4. Velocímetro HUD (Alinhado na parte inferior)
+  // 4. Velocímetro HUD
   const cx = 490, cy = 460, radius = 70;
   
   ctx.beginPath();
@@ -207,7 +205,7 @@ function draw() {
 
   ctx.drawImage(images.ball, ballX - ballRadius, ballY - ballRadius, ballRadius * 2, ballRadius * 2);
 
-  // 6. Placar e Mensagem de Tela
+  // 6. Placar
   ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
   ctx.fillRect(20, 15, 180, 45);
   ctx.strokeStyle = '#ffffff';
@@ -253,7 +251,6 @@ function handleAction() {
 
   isRunning = true;
 
-  // Mapeamento ajustado para a largura exata da trave da imagem de fundo
   const normalized = (angle + Math.PI) / Math.PI; 
   const targetX = 250 + (normalized * 480);
   ballX = targetX;
